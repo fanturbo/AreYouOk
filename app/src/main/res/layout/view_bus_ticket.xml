@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000">
+
+    <lock.war3.pub.areyouok.widget.AutoCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:cardCornerRadius="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ticket_container_middle_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/ticket_container_top_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="#9A9A9A">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/shuttle_ticket_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="11月26日"
+                            android:textColor="@color/text3"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/suhttle_ticket_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:text="乘车时间：19:00"
+                            android:textColor="@color/text3"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <lock.war3.pub.areyouok.OffcutView
+                        android:id="@+id/shuttle_ticket_offcutview"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="right"
+                        android:visibility="visible" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="25dp"
+                    android:paddingTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/shuttle_ticket_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="K004"
+                            android:textColor="@color/color1"
+                            android:textSize="50sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:id="@+id/shuttle_ticket_underline"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@color/text2" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/shuttle_ticket_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="票价1元"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:background="#00000000"
+                android:gravity="center">
+
+                <lock.war3.pub.areyouok.widget.LeftCircleView
+                    android:layout_width="20px"
+                    android:layout_height="wrap_content"
+                    android:background="#ff0" />
+
+                <lock.war3.pub.areyouok.DashView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:layerType="software" />
+
+                <lock.war3.pub.areyouok.widget.RightCircleView
+                    android:layout_width="20px"
+                    android:layout_height="wrap_content"
+                    android:background="#fff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ticket_container_bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="21dp">
+
+                <TextView
+                    android:id="@+id/shuttle_desc_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="一票一人仅限乘坐K004"
+                    android:textColor="@color/text2"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/shuttle_ticket_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginRight="21dp"
+                    android:layout_marginTop="21dp"
+                    android:background="@drawable/btn_dark_4dp"
+                    android:gravity="center"
+                    android:text="验票时间：11月20日18:42"
+                    android:textColor="@color/text3" />
+            </LinearLayout>
+        </LinearLayout>
+    </lock.war3.pub.areyouok.widget.AutoCardView>
+</FrameLayout>
