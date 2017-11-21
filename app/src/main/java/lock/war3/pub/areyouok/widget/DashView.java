@@ -1,4 +1,4 @@
-package lock.war3.pub.areyouok;
+package lock.war3.pub.areyouok.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,7 +25,6 @@ import com.zhy.autolayout.utils.AutoUtils;
 
 public class DashView extends View {
     private Paint mDashPaint;
-    private Paint mPaint;
     private int circleRadius = 20;
 
 
@@ -51,12 +50,6 @@ public class DashView extends View {
         mDashPaint.setAntiAlias(true);
         //DashPathEffect是Android提供的虚线样式API，具体的使用可以参考下面的介绍
         mDashPaint.setPathEffect(new DashPathEffect(new float[]{dashWidth, dashGap}, 0));
-
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);//取消锯齿
-        mPaint.setStyle(Paint.Style.FILL);//设置画圆弧的画笔的属性为描边(空心)，个人喜欢叫它描边，叫空心有点会引起歧义
-        mPaint.setStrokeWidth(width);
-        mPaint.setColor(getContext().getResources().getColor(R.color.color3));
     }
 
     @Override
@@ -65,12 +58,5 @@ public class DashView extends View {
         path.moveTo(0, circleRadius);//起始坐标
         path.lineTo(getWidth(), circleRadius);//终点坐标
         canvas.drawPath(path, mDashPaint);
-//        RectF oval = new RectF(-20, 0,
-//                circleRadius, circleRadius*2);
-//        canvas.drawArc(oval, -90, 180, true, mPaint);
-//
-//        RectF oval2 = new RectF(getWidth() - circleRadius, 0,
-//                getWidth()+circleRadius, circleRadius * 2);
-//        canvas.drawArc(oval2, -90, -180, true, mPaint);
     }
 }

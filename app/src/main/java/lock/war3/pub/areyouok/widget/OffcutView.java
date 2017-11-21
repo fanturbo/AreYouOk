@@ -1,4 +1,4 @@
-package lock.war3.pub.areyouok;
+package lock.war3.pub.areyouok.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.zhy.autolayout.utils.AutoUtils;
+
+import lock.war3.pub.areyouok.R;
 
 public class OffcutView extends View {
     private String a = "";

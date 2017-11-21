@@ -44,7 +44,13 @@ public class MainActivity extends AutoLayoutActivity
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,HaluoActivity.class));
+                startActivity(new Intent(MainActivity.this, HaluoActivity.class));
+            }
+        });
+        findViewById(R.id.btn2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CaiHongActivity.class));
             }
         });
 

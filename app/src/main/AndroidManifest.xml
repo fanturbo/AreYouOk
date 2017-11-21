@@ -70,6 +70,11 @@
             android:name=".HaluoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_haluo"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".CaiHongActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_cai_hong"
             android:theme="@style/FullscreenTheme"></activity>
     </application>
 
