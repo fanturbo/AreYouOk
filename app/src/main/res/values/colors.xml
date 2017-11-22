@@ -15,8 +15,10 @@
     <color name="color1">#3d3c4e</color>
     <color name="color2">#32A795</color>
     <color name="color3">#f00</color>
+    <color name="color4">#303135</color>
 
     <color name="black_overlay">#66000000</color>
     <color name="theme_color">#2ab9ff</color>
+    <color name="caihong_color">#61DAFB</color>
 
 </resources>

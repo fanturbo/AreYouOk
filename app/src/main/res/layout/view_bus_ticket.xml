@@ -126,8 +126,7 @@
 
             <lock.war3.pub.areyouok.widget.LeftCircleView
                 android:layout_width="22px"
-                android:layout_height="wrap_content"
-                android:background="#00000000" />
+                android:layout_height="wrap_content" />
 
             <lock.war3.pub.areyouok.widget.DashView
                 android:layout_width="0dp"
@@ -138,8 +137,7 @@
 
             <lock.war3.pub.areyouok.widget.RightCircleView
                 android:layout_width="22px"
-                android:layout_height="wrap_content"
-                android:background="#00000000" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout

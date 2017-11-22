@@ -21,6 +21,7 @@ import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import lock.war3.pub.areyouok.widget.OffcutView;
 
@@ -52,6 +53,14 @@ public class TicketFragment extends DialogFragment {
     Unbinder unbinder;
     private Context mContext;
 
+    public static TicketFragment newInstance(int i) {
+        Bundle args = new Bundle();
+        args.putInt("i", i);
+        TicketFragment fragment = new TicketFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -71,19 +80,24 @@ public class TicketFragment extends DialogFragment {
     }
 
     public void setTicket() {
+        int i = getArguments().getInt("i");
         Calendar instance = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("MM月dd日");
         SimpleDateFormat format2 = new SimpleDateFormat("验票时间：MM月dd日HH:mm");
         shuttleTicketDate.setText(format.format(Calendar.getInstance().getTime()));
         int hourOfDay = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        if (hourOfDay < 12) {
+        if (i == 0) {
             suhttleTicketTime.setText("06:30-09:30");
             shuttleTicketTitle.setText("K003");
             shuttleDescText.setText("一票一人仅限乘坐K003");
-        } else {
+        } else if (i == 1) {
             suhttleTicketTime.setText("17:30-21:00");
             shuttleTicketTitle.setText("K004");
             shuttleDescText.setText("一票一人仅限乘坐K004");
+        } else {
+            suhttleTicketTime.setText("06:30-09:30");
+            shuttleTicketTitle.setText("K005");
+            shuttleDescText.setText("一票一人仅限乘坐K005");
         }
         shuttleTicketCheck.setText(format2.format(Calendar.getInstance().getTime()));
         //判断是否是周五来设置价格
@@ -106,5 +120,10 @@ public class TicketFragment extends DialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    @OnClick(R.id.tv_close)
+    public void onViewClicked() {
+        this.dismiss();
     }
 }

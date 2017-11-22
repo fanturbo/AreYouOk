@@ -18,10 +18,24 @@ public class HaluoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_haluo);
-        findViewById(R.id.frame).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TicketFragment ticketFragment = new TicketFragment();
+                TicketFragment ticketFragment = TicketFragment.newInstance(0);
+                ticketFragment.show(getSupportFragmentManager(), TicketFragment.TAG);
+            }
+        });
+        findViewById(R.id.btn2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TicketFragment ticketFragment = TicketFragment.newInstance(1);
+                ticketFragment.show(getSupportFragmentManager(), TicketFragment.TAG);
+            }
+        });
+        findViewById(R.id.btn3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TicketFragment ticketFragment = TicketFragment.newInstance(2);
                 ticketFragment.show(getSupportFragmentManager(), TicketFragment.TAG);
             }
         });
