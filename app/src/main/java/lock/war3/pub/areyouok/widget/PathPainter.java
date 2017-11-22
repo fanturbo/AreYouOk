@@ -27,6 +27,8 @@ public class PathPainter extends View {
     private float mAnimatorValue;
     private Path mDst;
     private float mLength;
+    private int mStrokeWidth = 4;
+    private boolean flag;
 
     public PathPainter(Context context) {
         super(context);
@@ -39,9 +41,9 @@ public class PathPainter extends View {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(5);
         mPath = new Path();
-        mPath.addCircle(getWidth() / 2, getHeight() / 2, 300, Path.Direction.CW);
-        mPathMeasure.setPath(mPath, true);
-        mLength = mPathMeasure.getLength();
+//        mPath.addCircle(getWidth() / 2, getHeight() / 2, 100, Path.Direction.CW);
+//        mPathMeasure.setPath(mPath, true);
+//        mLength = mPathMeasure.getLength();
         mDst = new Path();
 
         final ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1);
@@ -64,12 +66,30 @@ public class PathPainter extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        mPath.addCircle(getWidth() / 2, getHeight() / 2, 100, Path.Direction.CW);
+        mPathMeasure.setPath(mPath, true);
+        mLength = mPathMeasure.getLength();
+
+
         mDst.reset();
         // 硬件加速的BUG
         mDst.lineTo(0, 0);
         float stop = mLength * mAnimatorValue;
-        float start = (float) (stop - ((0.5 - Math.abs(mAnimatorValue - 0.5)) * mLength));
+        float start = 0;//(float) (stop - ((0.5 - Math.abs(mAnimatorValue - 0.5)) * mLength));
         mPathMeasure.getSegment(start, stop, mDst, true);
+        if (!flag) {
+            mStrokeWidth++;
+            if (mStrokeWidth == 20) {
+                flag = true;
+            }
+        } else {
+            mStrokeWidth--;
+            if (mStrokeWidth == 1) {
+                flag = false;
+            }
+        }
+        mPaint.setStrokeWidth(mStrokeWidth);
+
         canvas.drawPath(mDst, mPaint);
     }
 }
