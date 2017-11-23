@@ -21,6 +21,7 @@ import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lock.war3.pub.areyouok.widget.CaihongView3;
 import lock.war3.pub.areyouok.widget.ParticleView;
 
 /**
@@ -80,6 +81,10 @@ public class CaiHongTicketActivity extends AutoLayoutActivity {
         setContentView(R.layout.activity_cai_hong_ticket);
         ButterKnife.bind(this);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.color4));
+//        CaihongView3 caihongView3 = (CaihongView3) findViewById(R.id.pv);
+//        ObjectAnimator animator = ObjectAnimator.ofFloat(caihongView3,"rotation",0,180,0);
+//        animator.setDuration(2000);
+//        animator.start();
         initData();
     }
 
@@ -108,7 +113,7 @@ public class CaiHongTicketActivity extends AutoLayoutActivity {
         }
         tvDate.setText(format.format(Calendar.getInstance().getTime()));
         ObjectAnimator objectAnimator = ObjectAnimator.ofInt(tvDate, "textColor", 0XFFAA5652, 0XFF97549B, 0XFF6661AE, 0XFF676F22, 0XFFAE5365, 0XFF956033, 0XFFA65948)
-                .setDuration(7000);
+                .setDuration(5000);
         objectAnimator.setEvaluator(new ArgbEvaluator());
         objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
         objectAnimator.start();

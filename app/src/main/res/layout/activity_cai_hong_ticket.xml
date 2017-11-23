@@ -127,6 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="20px"
                         android:text="正在读取"
+                        android:textStyle="bold"
                         android:textColor="#333333"
                         android:textSize="16sp" />
 
@@ -173,7 +174,7 @@
                 android:orientation="vertical"
                 android:padding="20px">
 
-                <lock.war3.pub.areyouok.widget.CaihongView2
+                <lock.war3.pub.areyouok.widget.CaihongView3
                     android:id="@+id/pv"
                     android:layout_width="match_parent"
                     android:layout_height="500px"
@@ -203,6 +204,7 @@
                     android:layout_margin="20px"
                     android:paddingLeft="20px"
                     android:text="乘车信息"
+                    android:textStyle="bold"
                     android:textColor="#333333"
                     android:textSize="16sp" />
 
@@ -288,6 +290,7 @@
                         android:layout_margin="20px"
                         android:paddingLeft="20px"
                         android:text="支付信息"
+                        android:textStyle="bold"
                         android:textColor="#333333"
                         android:textSize="16sp" />
 

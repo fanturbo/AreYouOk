@@ -21,6 +21,7 @@ import lock.war3.pub.areyouok.R;
 public class CaihongView2 extends View {
     private int padding;
     private Paint mPaint;
+    private Paint mPaint2;
     private Paint mCirclePaint;
     private PathMeasure mPathMeasure;
     private float mAnimatorValue;
@@ -29,6 +30,7 @@ public class CaihongView2 extends View {
     private int mStrokeWidth = 4;
     private boolean flag;
     private Path path;
+    private Path path2;
 
     public CaihongView2(Context context) {
         super(context);
@@ -44,8 +46,14 @@ public class CaihongView2 extends View {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);//取消锯齿
         mPaint.setStyle(Paint.Style.FILL);//设置画圆弧的画笔的属性为描边(空心)，个人喜欢叫它描边，叫空心有点会引起歧义
-        mPaint.setStrokeWidth(mStrokeWidth);
-        mPaint.setColor(getContext().getResources().getColor(R.color.caihong_color));
+        mPaint.setStrokeWidth(1);
+        mPaint.setColor(getContext().getResources().getColor(R.color.text3));
+
+        mPaint2 = new Paint();
+        mPaint2.setAntiAlias(true);//取消锯齿
+        mPaint2.setStyle(Paint.Style.FILL);//设置画圆弧的画笔的属性为描边(空心)，个人喜欢叫它描边，叫空心有点会引起歧义
+        mPaint2.setStrokeWidth(1);
+        mPaint2.setColor(getContext().getResources().getColor(R.color.caihong_color));
 
         mCirclePaint = new Paint();
         mCirclePaint.setAntiAlias(true);//取消锯齿
@@ -76,11 +84,12 @@ public class CaihongView2 extends View {
             RectF oval = new RectF(padding, 0,
                     getWidth() - padding, getHeight());
             path = new Path();
+            path2 = new Path();
             path.addOval(oval, Path.Direction.CW);
             RectF outerOval = new RectF(padding, 0,
                     getWidth() - padding+20, getHeight()+20);
-            path.addOval(outerOval, Path.Direction.CW);
-            path.setFillType(Path.FillType.EVEN_ODD);
+            path2.addOval(outerOval, Path.Direction.CW);
+//            path.setFillType(Path.FillType.EVEN_ODD);
             mPathMeasure.setPath(path, true);
             mLength = mPathMeasure.getLength();
         }
@@ -104,14 +113,17 @@ public class CaihongView2 extends View {
                 flag = false;
             }
         }
-        mPaint.setStrokeWidth(mStrokeWidth);
+//        mPaint.setStrokeWidth(mStrokeWidth);
         canvas.rotate(30, getWidth() / 2, getHeight() / 2);
+
+//        canvas.rotate(30, getWidth() / 2, getHeight() / 2);
+        canvas.drawPath(path2, mPaint2);
         canvas.drawPath(path, mPaint);
 
-        canvas.rotate(120, getWidth() / 2, getHeight() / 2);
-        canvas.drawPath(path, mPaint);
-        canvas.rotate(120, getWidth() / 2, getHeight() / 2);
-        canvas.drawPath(path, mPaint);
+//        canvas.rotate(120, getWidth() / 2, getHeight() / 2);
+//        canvas.drawPath(path, mPaint);
+//        canvas.rotate(120, getWidth() / 2, getHeight() / 2);
+//        canvas.drawPath(path, mPaint);
 
         canvas.drawCircle(getWidth() / 2, getHeight() / 2, AutoUtils.getPercentWidthSize(46), mCirclePaint);
     }
