@@ -25,6 +25,7 @@ import lock.war3.pub.areyouok.R;
 public class CaihongView3 extends View {
     private int padding;
     private Paint mPaint;
+    private Paint mWhitePaint;
     private Paint mCirclePaint;
     private float mAnimatorValue;
     private int mStrokeWidth = 1;
@@ -49,6 +50,12 @@ public class CaihongView3 extends View {
         mPaint.setStyle(Paint.Style.FILL);//设置画圆弧的画笔的属性为描边(空心)，个人喜欢叫它描边，叫空心有点会引起歧义
         mPaint.setStrokeWidth(mStrokeWidth);
         mPaint.setColor(getContext().getResources().getColor(R.color.caihong_color));
+
+        mWhitePaint = new Paint();
+        mWhitePaint.setAntiAlias(true);//取消锯齿
+        mWhitePaint.setStyle(Paint.Style.FILL);//设置画圆弧的画笔的属性为描边(空心)，个人喜欢叫它描边，叫空心有点会引起歧义
+        mWhitePaint.setStrokeWidth(10);
+        mWhitePaint.setColor(getContext().getResources().getColor(R.color.colorAccent));
 
         mCirclePaint = new Paint();
         mCirclePaint.setAntiAlias(true);//取消锯齿
@@ -76,11 +83,15 @@ public class CaihongView3 extends View {
     }
 
     private void drawOval(Canvas canvas) {
+        startPoint = new RectF(padding, 0,
+                getWidth() - padding, getHeight());
         path.addOval(startPoint, Path.Direction.CW);
         path.addOval(currentPoint, Path.Direction.CW);
+
         path.setFillType(Path.FillType.EVEN_ODD);
         canvas.rotate(30, getWidth() / 2, getHeight() / 2);
         canvas.drawPath(path, mPaint);
+        canvas.drawArc(currentPoint, 0, 90, false, mWhitePaint);
         canvas.rotate(120, getWidth() / 2, getHeight() / 2);
         canvas.drawPath(path, mPaint);
         canvas.rotate(120, getWidth() / 2, getHeight() / 2);
@@ -113,7 +124,7 @@ public class CaihongView3 extends View {
         anim.setRepeatCount(ValueAnimator.INFINITE);
 //        anim.setRepeatMode(ValueAnimator.REVERSE);
         anim.setDuration(1200);
-        anim.start();
+//        anim.start();
     }
 
     class PointEvaluator implements TypeEvaluator {
