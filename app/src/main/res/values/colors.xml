@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3B3C4E</color>
-    <color name="colorPrimaryDark">#3B3C4E</color>
+    <color name="colorPrimary">#303135</color>
+    <color name="colorPrimaryDark">#303135</color>
     <color name="colorAccent">#FF4081</color>
     <color name="text1">#333333</color>
     <color name="text2">#666666</color>
@@ -16,9 +16,11 @@
     <color name="color2">#32A795</color>
     <color name="color3">#f00</color>
     <color name="color4">#303135</color>
+    <color name="color5">#80000000</color>
 
     <color name="black_overlay">#66000000</color>
     <color name="theme_color">#2ab9ff</color>
     <color name="caihong_color">#61DAFB</color>
+    <color name="haluo_color">#3795DF</color>
 
 </resources>

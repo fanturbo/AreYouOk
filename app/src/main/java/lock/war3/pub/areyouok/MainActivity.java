@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -45,6 +46,12 @@ public class MainActivity extends AutoLayoutActivity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, HaluoActivity.class));
+            }
+        });
+        findViewById(R.id.btn_haluo_wechat).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, HaluoWeChatActivity.class));
             }
         });
         findViewById(R.id.btn2).setOnClickListener(new View.OnClickListener() {

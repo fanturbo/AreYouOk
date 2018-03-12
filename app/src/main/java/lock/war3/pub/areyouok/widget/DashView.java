@@ -40,11 +40,11 @@ public class DashView extends View {
         }
         final DisplayMetrics metrics = getResources().getDisplayMetrics();
         float width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, metrics);
-        float dashGap = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, AutoUtils.getPercentWidthSize(3), metrics);
-        float dashWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, AutoUtils.getPercentWidthSize(7), metrics);
+        float dashGap = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, AutoUtils.getPercentWidthSize(2), metrics);
+        float dashWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, AutoUtils.getPercentWidthSize(2), metrics);
 
         mDashPaint = new Paint();
-        mDashPaint.setColor(0xff3b3c4e);
+        mDashPaint.setColor(0xffE6E6E6);
         mDashPaint.setStyle(Paint.Style.STROKE);
         mDashPaint.setStrokeWidth(width);
         mDashPaint.setAntiAlias(true);
