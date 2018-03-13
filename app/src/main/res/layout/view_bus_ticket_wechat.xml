@@ -79,8 +79,7 @@
                             android:gravity="center"
                             android:text="11月26日"
                             android:textColor="@color/text3"
-                            android:textSize="25sp"
-                            android:textStyle="bold" />
+                            android:textSize="25sp"/>
 
                         <TextView
                             android:id="@+id/suhttle_ticket_time"
@@ -131,6 +130,8 @@
                             android:id="@+id/shuttle_ticket_underline"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
                             android:layout_marginTop="6dp"
                             android:background="@color/text2" />
                     </LinearLayout>
