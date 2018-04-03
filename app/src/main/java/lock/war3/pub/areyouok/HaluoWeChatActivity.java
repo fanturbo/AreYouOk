@@ -110,7 +110,7 @@ public class HaluoWeChatActivity extends AppCompatActivity {
     public void setTicket(int i) {
         Calendar instance = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("MM月dd日");
-        SimpleDateFormat format2 = new SimpleDateFormat("验票时间：MM月dd日HH:mm");
+        SimpleDateFormat format2 = new SimpleDateFormat("验票时间：HH:mm:ss");
         shuttleTicketDate.setText(format.format(Calendar.getInstance().getTime()));
         int hourOfDay = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         if (i == 0) {
