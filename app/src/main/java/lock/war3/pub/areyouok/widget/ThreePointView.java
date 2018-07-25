@@ -36,10 +36,10 @@ public class ThreePointView extends View {
     protected void onDraw(Canvas canvas) {
 
         Paint paint = new Paint();
-        paint.setColor(Color.WHITE);
+        paint.setColor(Color.BLACK);
         paint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(getWidth()/2,getHeight()/2,5,paint);
-        canvas.drawCircle(getWidth()/2,getHeight()/2-22,5,paint);
-        canvas.drawCircle(getWidth()/2,getHeight()/2+22,5,paint);
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, 5, paint);
+        canvas.drawCircle(getWidth() / 2 - 22, getHeight() / 2, 5, paint);
+        canvas.drawCircle(getWidth() / 2 + 22, getHeight() / 2, 5, paint);
     }
 }

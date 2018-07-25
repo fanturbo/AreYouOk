@@ -1,5 +1,6 @@
 package lock.war3.pub.areyouok;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jaeger.library.StatusBarUtil;
 import com.zhy.autolayout.config.AutoLayoutConifg;
 import com.zhy.autolayout.utils.AutoUtils;
 
@@ -68,6 +70,23 @@ public class HaluoWeChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_haluo_wechat);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if ("Xiaomi".equals(Build.MANUFACTURER)) {
+                StatusBarUtil.setColor(this, getResources().getColor(android.R.color.white), 0);
+                Utils.StatusBarLightMode(this, 1);
+            } else if ("MEIZU".equals(Build.MANUFACTURER)) {
+                //识别魅族手机 测试下魅族5.0的手机
+                StatusBarUtil.setColor(this, getResources().getColor(android.R.color.white), 0);
+                Utils.StatusBarLightMode(this, 2);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                StatusBarUtil.setColor(this, getResources().getColor(android.R.color.white), 0);
+                Utils.StatusBarLightMode(this, 3);
+            } else {
+                StatusBarUtil.setColor(this, getResources().getColor(android.R.color.white), 0);
+            }
+        } else {
+            StatusBarUtil.setColor(this, getResources().getColor(android.R.color.white), 0);
+        }
         ButterKnife.bind(this);
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +114,7 @@ public class HaluoWeChatActivity extends AppCompatActivity {
             TextView textView = new TextView(this);
             textView.setHeight(AutoUtils.getPercentHeightSize(40));
             linearTicket.addView(textView, 0);
-        }else{
+        } else {
             TextView textView = new TextView(this);
             textView.setHeight(AutoUtils.getPercentHeightSize(100));
             linearTicket.addView(textView, 0);
