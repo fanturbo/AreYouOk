@@ -65,6 +65,7 @@ public class HaluoWeChatActivity extends AppCompatActivity {
     FrameLayout frame;
     @BindView(R.id.login_ll_hide)
     LinearLayout relativeLayout;
+    private String mPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +120,7 @@ public class HaluoWeChatActivity extends AppCompatActivity {
             textView.setHeight(AutoUtils.getPercentHeightSize(100));
             linearTicket.addView(textView, 0);
         }
+        mPrice = getIntent().getStringExtra("price");
     }
 
     @OnClick(R.id.tv_close)
@@ -146,13 +148,6 @@ public class HaluoWeChatActivity extends AppCompatActivity {
             shuttleDescText.setText("一票一人仅限乘坐K005");
         }
         shuttleTicketCheck.setText(format2.format(Calendar.getInstance().getTime()));
-        //判断是否是周五来设置价格
-
-        int dayOfWeek = instance.get(Calendar.DAY_OF_WEEK);
-        if (dayOfWeek == 6) {
-            shuttleTicketPrice.setText("票价1元");
-        } else {
-            shuttleTicketPrice.setText("票价2元");
-        }
+        shuttleTicketPrice.setText("票价"+mPrice+"元");
     }
 }

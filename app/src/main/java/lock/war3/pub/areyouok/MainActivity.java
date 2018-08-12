@@ -48,10 +48,21 @@ public class MainActivity extends AutoLayoutActivity
                 startActivity(new Intent(MainActivity.this, HaluoActivity.class));
             }
         });
-        findViewById(R.id.btn_haluo_wechat).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_haluo_wechat_one).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, HaluoWeChatActivity.class));
+                Intent intent = new Intent(MainActivity.this, HaluoWeChatActivity.class);
+                intent.putExtra("price","1");
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.btn_haluo_wechat_two).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HaluoWeChatActivity.class);
+                intent.putExtra("price","2");
+                startActivity(intent);
             }
         });
         findViewById(R.id.btn2).setOnClickListener(new View.OnClickListener() {

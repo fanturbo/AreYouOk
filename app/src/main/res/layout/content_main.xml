@@ -20,15 +20,24 @@
             android:text="哈罗班车" />
 
         <Button
-            android:id="@+id/btn_haluo_wechat"
+            android:id="@+id/btn_haluo_wechat_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="哈罗班车微信" />
+            android:layout_marginTop="20dp"
+            android:text="哈罗班车微信1元" />
+
+        <Button
+            android:id="@+id/btn_haluo_wechat_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="哈罗班车微信2元" />
 
         <Button
             android:id="@+id/btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="彩虹巴士" />
     </LinearLayout>
 
