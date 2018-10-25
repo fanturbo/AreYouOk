@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Rainbow</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <link href="http://www.rainbow-bus.cn/rainbow/wechat/css/weui.min.css" rel="stylesheet" />
+        <link href="http://www.rainbow-bus.cn/rainbow/wechat/lib/jquery-weui/css/jquery-weui.css" rel="stylesheet" />
+        <link href="http://www.rainbow-bus.cn/rainbow/wechat/css/wechat.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="http://www.rainbow-bus.cn/rainbow/wechat/js/axios.min.js"></script>
+        <script src="http://www.rainbow-bus.cn/rainbow/wechat/lib/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script type="text/javascript">
+            /**
+             * 加法计算
+             * @param arg1
+             * @param arg2
+             * @returns {number}
+             */
+            function accAdd(arg1,arg2){
+                var r1,r2,m;
+                try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}
+                try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}
+                m=Math.pow(10,Math.max(r1,r2));
+                return parseFloat((arg1*m+arg2*m)/m);
+            }
+            /**
+             * 乘法运算
+             * @param arg1
+             * @param arg2
+             * @returns {number}
+             */
+            function accMul(arg1,arg2) {
+                var m=0,s1=arg1.toString(),s2=arg2.toString();
+                try{m+=s1.split(".")[1].length}catch(e){}
+                try{m+=s2.split(".")[1].length}catch(e){}
+                return parseFloat(Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m));;
+            };
+
+            function dialog(title,msg) {
+                $("#dialog").find(".weui_dialog_title").text(title);
+                $("#dialog").find(".weui_dialog_bd").text(msg);
+                $("#dialog").show();
+            }
+            function newDialog(name,title,msg) {
+                $("#dialog").find(".weui_dialog_title").text(title);
+                $("#dialog").find(".weui_dialog_bd").text(msg);
+                $("#dialog").show();
+                /*$('.dig_warning').hide();
+                $('.dig_success').hide();
+                $("#newDialog").find(name).show();
+                $("#newDialog").find(".dig_title").text(title);
+                $("#newDialog").find(".dig_text").html(msg);
+                $("#newDialog").show();
+                setTimeout(function () {
+                    $("#newDialog").hide();
+                },3000);
+                $('#closeDialog').on('click',function () {
+                    $("#newDialog").hide();
+                });*/
+            }
+
+            if ('' !== '') {
+                dialog("错误", '');
+            }
+
+
+            function oauth_redirect(url, param) {
+                var op = "";
+                if (param) {
+                    var pStr = JSON.stringify(param);
+                    op += "?op=" + encodeURIComponent(pStr.substring(1, pStr.length - 1).replace(/\"/g,""));
+                }
+                var redirect_url =url + op;
+                window.location.href = redirect_url;
+
+            }
+        </script>
+        <style>
+            #cnzz_stat_icon_1261420836{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="/rainbow/wechat/lib/jquery-weui/js/toast.js"></script>
+        <script src="http://www.rainbow-bus.cn/rainbow/wechat/lib/jquery-weui/js/jquery-extend.js"></script>
+        <script src="http://www.rainbow-bus.cn/rainbow/wechat/js/vue.js"></script>
+        <script src="http://www.rainbow-bus.cn/rainbow/wechat/js/axios.min.js"></script>
+        <link rel="stylesheet" href="http://www.rainbow-bus.cn/rainbow/wechat/css/ticket.css" />
+        <script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1ab82983ace6e"></script>
+<style type="text/css">
+    /* body {
+         overflow: hidden;
+     }*/
+    .weui_cell_new:before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 1px;
+        color: #D9D9D9;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+        left: 15px;
+    }
+
+    .weui_cell {
+        border-bottom: 1px solid #f2f2f2;
+    }
+    .weui_cell:after{
+        border: none;
+    }
+    #orderDetail {
+        position: absolute;
+        padding-bottom: 80px;
+        top: 50px;
+        bottom: 35px;
+        left: 0;
+        right: 0;
+    }
+    #nowTicket{
+        width: 97%;
+        padding: 6px 1.5%;
+        background: #fff;
+        border-radius: 6px;
+    }
+    .open_wechat{
+        display: none;
+        position: fixed;
+        top: -1px;
+        left: 0;
+        z-index: 10;
+    }
+    .open_wechat img{
+        width: 100%;
+    }
+    #share{
+        display: none;
+    }
+    .every_bill_title{
+        margin-right: 16px;
+    }
+</style>
+
+<script type="text/javascript">
+    var orderSeats;
+    var payParam;
+    var stateInterval;
+    var snpId;
+    var planNum;
+    var oid;
+    var startTime;
+    var lastTime;
+    var nowTime;
+
+    function returnTicket() {
+        var money = $("#moneyHidden").val();
+        var id = $("#idHidden").val();
+        var passengerId = $("#passengerIdHidden").val();
+        var planId = $("#planIdHidden").val();
+        var orderNum = $("#orderNum").html();
+        var ticketMoney = $("#paid").html();
+        ticketMoney = ticketMoney.substring(0,ticketMoney.length-1);
+        $.ajax({
+            url: "/rainbow/wechat/dl/returnTicket",
+            type: 'post',
+            dataType: 'json',
+            data: {
+                "id": id,
+                "money": money,
+                "ticketMoney":ticketMoney,
+                "passengerId": passengerId,
+                "orderSeats": orderSeats.join(","),
+                "planId": planId,
+                "orderNum":orderNum
+            },
+            success: function (resp) {
+                $.hideLoading();
+                $("#dialog1").hide();
+                if (resp.type === "sys") {
+                    dialog("提示", "退款失败!");
+                }
+                else {
+                    newDialog(".dig_success", "退款成功",'退款金额将返回您的零钱账户哦');
+
+                    setTimeout(function () {
+                        location.reload();
+                    },2000);
+                }
+            }
+        });
+    };
+
+
+
+    $(document).ready(function () {
+        $("#deleteBtn").click(function () {
+            $("#dialogDelete").show();
+        });
+        $("#okBtn").click(function() {
+            returnTicket();
+        });
+        $("#bak").click(function () {
+            $.post("/rainbow/wechat/dl/isToReturn",{id:$("#idHidden").val(),orderNum:$("#orderNum").html(),buyType:$("#buyTypeHidden").val()},function(res){
+                if(res.success){
+                    if(res.obj){    //可退款
+                        $("#moneyHidden").val(res.obj);
+                        $("#paid_t").html(floatFormat(res.obj));
+                        if(res.sxMon != 0){
+                            $('#pay_hand').show();
+                            $('#pay_handling').text(res.sxMon);
+                        }else {
+                            $('#pay_hand').hide();
+                        }
+                        if($("#buyTypeHidden").val() == 0){
+                            $("#dialog1").show();
+                            $('#returnCount').text('本周您还有'+res.returnCou+'次退款机会');
+                        }else {
+                            $("#dialog1").show();
+                            $('#returnCount').text('手续费'+res.sxMon+'元');
+                        }
+                    }else{
+                        newDialog('.dig_warning','温馨提示',res.msg);
+                    }
+                }else{
+                    newDialog('.dig_warning','温馨提示',res.msg);
+                }
+            });
+        });
+        $("#backRule").click(function () {
+            $('#ruleDetails').show()
+        });
+        $("#closeRule").click(function () {
+            $("#ruleDetails").hide();
+        });
+        $("#cancelBtn").click(function () {
+            $("#dialog1").hide();
+        });
+        $("#backBtn").click(function () {
+            oauth_redirect("/rainbow/wechat/ow");
+        });
+        $("#noDelete").click(function () {
+            $("#dialogDelete").hide();
+        });
+
+        $("#okDelete").click(function () {
+            deleteList();
+        });
+
+        /*initTable();*/
+//        isFirstOrder();
+        $("#orderDetail").css("height", $(document).height() - $(".headerBar").height());
+    });
+
+    function fix(num) {
+        n = num / 10000;
+        if (n >= 1) {
+            return n.toFixed(1) + "万";
+        } else {
+            return num;
+        }
+    }
+    function deleteList() {
+        var id = $("#idHidden").val();
+        var tb = $("#tboneHidden").val();
+        $.showLoading();
+        $.ajax({
+            url: "/rainbow/wechat/dl/delete",
+            type: 'post',
+            dataType: 'json',
+            data: {
+                "id": id,
+                "tb": tb
+            },
+            success: function (resp) {
+                $.hideLoading();
+                if (resp.err) {
+                    if (resp.type === "sys") {
+                        $("#dialogDelete").hide();
+                        dialog("错误", "系统异常!");
+                    }
+                } else {
+                    oauth_redirect("/rainbow/wechat/ow");
+                }
+            }
+        });
+    }
+
+    function floatFormat(amt) {
+        if (isNaN(amt))
+            return 0.00; //如果不是数字，返回0.00
+        amt = Math.abs(amt); //取绝对值
+        return (amt.toFixed(2)); //保留两位小数
+    }
+
+    //页面跳转
+    function oauth_redirect(url, param) {
+        var op = "";
+        if (param) {
+            var pStr = JSON.stringify(param);
+            op += "?op=" + pStr.substring(1, pStr.length - 1).replace(/\"/g,"");
+        }
+        var redirect_url =url + op;
+        window.location.href = redirect_url;
+
+    }
+
+</script>
+<div class="open_wechat">
+    <img src="/rainbow/wechat/img/open_wechat.png">
+</div>
+<div id="ferryDetails">
+    <div class="headerBar ">
+        <a class="go_back" href="javascript:void(0);"></a>
+        订单详情
+        <span class="cright back_rule" id="backRule" href="javascript:void(0)" hidden><i>?</i></span>
+        <span class="cright back_ticket" style="width:40px;right:30px;" id="bak" href="javascript:void(0)" hidden>退款</span>
+    </div>
+    <div class="content" id="orderDetail">
+        <div class="driver_name" style="display: none;">
+            <p class="diver_name_word" id="busDriver1"></p>
+            <p class="diver_procurator" id="procurator"></p>
+        </div>
+        <div class=" bill_number" style="height: 10px;">
+            <!--订单编号：<span id="orderNum"></span>-->
+        </div>
+
+        <div class="today_ticket" style="padding:10px 0; background: #fff" v-if="isCheckTicket">
+            <div class="ticket_title clearfix" style="height: 98px;">
+                <h3 class="route_name" v-text="routeName"></h3>
+                <div class="start_end clearfix">
+                    <p class=" start_ads clearfix" style=" height:18px; line-height: 18px; font-size: 13px;">
+                        <i class=" cleft start_circle"></i>
+                        <span class="cleft" v-text="firstStationName"></span>
+                    </p>
+                    <p class=" end_ads clearfix" style=" height:18px; line-height: 18px; font-size: 13px;">
+                        <i class="cleft end_circle"></i>
+                        <span class="cleft" v-text="lastStationName"></span>
+                    </p>
+                </div>
+            </div>
+            <div class="" style="height:200px;">
+                <!--<h3 style=" margin-top: 12px; font-size: 43px; padding: 36px 0 0; text-align: center;color:#486ba6; " id="car_number1"></h3>-->
+                <div class="seat_info" style="color: #486ba6;">
+                    <div class="clearfix bg_animate seat_info_block" style=" position: absolute; top: 96px; font-size: 1.5rem; font-weight: bold; width:100%; margin: 0 auto;text-align: center;z-index: 10; background-image: none;">
+                        <div>
+                            <span v-text="carTime"></span>
+                        </div>
+                    </div>
+                    <!--旋转-->
+                    <div class="circles" style="top:0" v-show="isCheckTicket">
+                        <!--v-show="isCheckTicket"-->
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+    </div>
+        <div id="otherTicket" class="bill_details" style="padding-bottom: 13px;" v-if="!isCheckTicket">
+        <div class="clearfix route_details_title">
+            <h3 class="route_name cleft" id="route_name1" v-text="routeName"></h3>
+        </div>
+        <div class="start_end">
+            <div class="clearfix start_point mt2">
+                <i class=" cleft start_circle"></i>
+                <p class="cleft" style="width: 84%; overflow:hidden; white-space: nowrap;text-overflow: ellipsis " v-text="firstStationName"></p>
+            </div>
+
+            <div class="clearfix end_point">
+                <i class=" cleft end_circle"></i>
+                <p class="cleft" style="width: 84%; overflow:hidden; " v-text="lastStationName"></p>
+            </div>
+        </div>
+        <div class="seat_info" style="display: none;">
+            <div class="clearfix seat_info_block" style="font-weight: bold; width:90%; margin: 0 auto;text-align: center;">
+                <div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div id="more_operate" class="clearfix more_operate" style="display: none;">
+        <a id="join_talk" class="cleft car_position join_talk_2">加入群聊</a>
+        <a id="vp" class="cright car_position" href="javascript:void(0);">站点信息</a>
+        </div>
+        <div id="other_details_info">
+        <div class="bill_details">
+            <h3 class="route_details_title">乘车信息</h3>
+            <ul class="bill_details_list">
+                <li class="clearfix">
+                    <span class="cleft every_bill_title">乘车日期:</span>
+                    <p class="cleft" style="color: #00a7d0; font-weight: bold;" v-text="carTime"></p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="bill_details">
+            <h3 class="route_details_title">支付信息</h3>
+            <ul class="bill_details_list">
+                <li class="clearfix">
+                    <span class="cleft every_bill_title">实付金额:</span>
+                    <p class="cleft" id="paid" v-text="money"></p>
+                </li>
+                <li class="clearfix">
+                    <span class="cleft every_bill_title">订单状态:</span>
+                    <p class="cleft" id="orderState" v-text="orderStatusT"></p>
+                </li>
+                <li class="clearfix">
+                    <span class="cleft every_bill_title ">下单日期</span>
+                    <p class="cleft orange" style="color: #999;" v-text="carTime"></p>
+                </li>
+                <li class="clearfix">
+                    <span class="cleft every_bill_title ">订单编号</span>
+                    <p class="cleft orange" style="color: #999;" v-text="orderNumber"></p>
+                </li>
+            </ul>
+        </div>
+        <div style="height: 2px;background: #f2f2f2;"></div>
+        <div class="weui_cell_new" style="display:none ;padding: 0px 10px 0px 10px;">
+            <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px;">
+                <span>发车时间：</span><span id="routeTime"></span>
+                <button id="payMoney" style="display: none;float: right;margin-right: 10px;color:white;
+                    height: 30px;width: 60px;background-color: #05B402;border: 0;border-radius: 5px;">支付
+                </button>
+
+            </div>
+        </div>
+        </div>
+
+
+
+    <div class="weui_cells" style=" display:none ;margin-top:0;background-color: white;">
+        <div class="weui_cell" style="padding: 10px;border:0;">
+            <div class="weui_cell_bd weui_cell_primary">
+                <span id="type"></span>
+            </div>
+            <div class="weui_cell_new">
+                <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px;">
+                    <!--<span>下单时间：</span><span id="createTime"></span>-->
+                </div>
+            </div>
+        </div>
+        <div class="weui_cell" style="padding: 5px 10px 5px 10px;">
+            <div class="weui_cell_bd weui_cell_primary" style=" font-size: 16px">
+                <span id="routeName"></span>
+            </div>
+        </div>
+        <div class="weui_cell_new" style="padding: 0px 10px 0px 10px;border-top: 5px;">
+            <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px">
+                <span>行&#12288;&#12288;程：</span><span id="distance"></span><span>公里</span>
+            </div>
+        </div>
+        <div class="weui_cell_new" style="padding: 0px 10px 0px 10px;">
+            <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px;">
+                <span>用&#12288;&#12288;时：约<span id="tripTime"></span>分钟</span>
+            </div>
+        </div>
+
+        <div class="weui_cell_new" style="padding: 0px 10px 0px 10px;border-top: 5px;">
+            <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px">
+                <span>到站时间：</span><span id="firstTime"></span>
+            </div>
+        </div>
+        <div class="weui_cell weui-row weui-no-gutter" style="font-size: 14px; ">
+            <div class="weui_cell_bd weui_cell_primary weui-col-60">
+                <span>车票</span>
+            </div>
+            <div class=" weui-col-40 weui-row weui-no-gutter" style="color: red">
+                <span class="weui-col-50" style="padding-left: 15%;">X<span id="count"></span></span>
+                <span class="weui-col-50">￥<span id="ticketPrice"></span></span>
+            </div>
+        </div>
+        <div id="service" class="weui_cells" style="margin-top: 0"></div>
+
+    </div>
+    </div>
+    <div class="pay_moneyDiv" style="position: fixed; padding-top: 0;">
+        <a id="btn_a" href="/rainbow/wechat/cht" class="weui_btn_warn pay_money_btn">继续乘车</a>
+    </div>
+    <div class="weui_dialog_confirm" id="dialog1" style="display: none;">
+        <div class="weui_mask weui_mask_visible"></div>
+        <div class="weui_dialog weui_dialog_visible">
+            <div class="trade_record_title" style="width: 50%;border-color: #999; margin: 0 auto 26px;;">
+                <p style="background: #fafafc;font-size: 0.8rem;color: #555; font-weight: bold;">退订车票</p>
+            </div>
+            <div class="weui_dialog_bd" style="color: #333; text-align: center; font-size: 15px;"><span v-text="firstStationName"></span>--<span v-text="lastStationName"></span></div>
+            <div class="weui_dialog_bd" style="margin: 10px auto; font-size: 14px; text-align: center;">乘车日期<span id="serviceDate_t"></span><br />退款金额￥<span id="paid_t"></span><span id="pay_hand" style="display: none;">&nbsp;&nbsp;手续费￥<span id="pay_handling"></span></span></div>
+
+            <!--<div class="weui_dialog_bd">退款金额￥<span>20.00</span></div>-->
+            <!--<div class="weui_dialog_bd">退款后,金额会以零钱方式退回到您的账户</div>-->
+            <div class="clearfix" style="margin: 20px;">
+                <a id="cancelBtn" href="javascript:;" class="cright pay_money_btn" style="width: 47%; height: 38px;background: #fff;color:#999;border:1px solid #ccc; ">取消</a>
+                <a id="okBtn" href="javascript:;" class="cleft pay_money_btn" style="width: 47%;">确定</a>
+            </div>
+            <p id="returnCount" style="margin:-10px 0 10px 0;text-align: center;color: red"></p>
+        </div>
+    </div>
+
+    <div class="weui_dialog_alert" id="dialogDelete" style="display: none;">
+        <div class="weui_mask weui_mask_visible"></div>
+        <div class="weui_dialog weui_dialog_visible">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title">提示</strong></div>
+            <div class="weui_dialog_bd">
+                <div class="weui_cell">
+                    <label style="width: 100%;text-align: center;">是否确定删除</label>
+                </div>
+            </div>
+            <div class="weui_dialog_ft">
+                <a id="noDelete" href="javascript:;" class="weui_btn_dialog default"
+                   style="border-right: 2px solid #d5d5d6;">取消</a>
+                <a id="okDelete" href="javascript:;" class="weui_btn_dialog primary">确定</a>
+            </div>
+        </div>
+    </div>
+    <form id="detailForm" action="" method="post">
+        <input id="soIdHidden" name="soIdHidden" type="hidden" value="153990658182656467144"/>
+        <input id="buyTypeHidden" type="hidden" />
+        <input id="tbHidden" name="tbHidden" type="hidden" value="1"/>
+        <input id="idHidden" type="hidden"/>
+        <input id="tboneHidden" type="hidden"/>
+        <input id="moneyHidden" type="hidden"/>
+        <input id="passengerIdHidden" type="hidden"/>
+        <input id="driverIdHidden" type="hidden"/>
+        <input id="goodCountC" type="hidden"/>
+        <input id="badCountC" type="hidden"/>
+        <input id="planIdHidden" type="hidden"/>
+        <input id="routesId" name="routesIdHidden" type="hidden" value="661"/>
+        <input id="uid" name="uidHidden" type="hidden" value=""/>
+        <input id="did" name="didHidden" type="hidden" value=""/>
+        <input id="orderId" name="orderIdHidden" type="hidden" />
+        <input id="createTimeHidden" name="createTimeHidden" type="hidden" />
+        <!--分享title-->
+        <input id="titleHidden" name="titleHidden" type="hidden" />
+        <!--分享url-->
+        <input id="urlHidden" name="urlHidden" type="hidden" />
+        <!--分享imgUrl-->
+        <input id="imgUrlHidden" name="imgUrlHidden" type="hidden" />
+    </form>
+</div>
+<script>
+    new Vue({
+        el:'#ferryDetails',
+        data:{
+            routeName:'C001紫金新干线—回龙观东大街地铁',
+            orderId:'D153923459901239324417622',
+            orderNumber:'D153923459901239324417622',
+            carTime:'2018-10-25',
+            driveName:'',
+            money:'2.99',
+            orderStatus: '0',
+            isCheckTicket: true,
+            firstStationName:'回龙观东大街地铁站',
+            lastStationName:'紫金新干线二区西门',
+        },
+        mounted:function () {
+            this.getDetails();
+        },
+        computed:{
+            orderStatusT:function () {
+                if(this.orderStatus == 0){
+                    return '已支付'
+                }else {
+                    return '已失效'
+                }
+            }
+        },
+        methods:{
+            getDetails:function () {
+                axios.post('/rainbow/wechat/shuttlebus/getOrederInfo',{
+                    isArchived: '1',
+                    orderId:'153990658182656467144'
+                }).then(function (res) {
+                    if(res.status){
+                        var details = res.data.data[0].orderInfo;
+                        this.orderId = details.id;
+                        this.orderNumber = details.orderNumber;
+                        this.carTime = details.createTime.split(' ')[0];
+                        this.driveName = details.driverName;
+                        this.routeName = details.routeName;
+                        this.money = details.sumPrice;
+                        this.orderStatus = details.state;
+                        this.firstStationName = details.up_station_name;
+                        this.lastStationName = details.down_station_name;
+                        if(details.isCheckTicket == 1){ //是否验票
+                            this.isCheckTicket = true;
+                        }
+                    }
+                }.bind(this)).catch(function (err) {
+                    console.log(err.msg);
+                })
+            }
+        }
+    })
+</script>
+        <script type="text/javascript">
+            var aaa = "1111";
+            var title = '';
+            var share_link =  '';
+            $(function () {
+                //获取公告
+                if($('#scroll_div').length>0){
+                    $.post('/rainbow/wechat/r/getNotice',function (data) {
+                        if(data.success){
+                            if(data.data.length>0){
+                                if($('.seatsArea').length>0){
+                                    $('.seatsArea').css('top',260);
+                                }
+                                $('.all_broadcast').show();
+                                $('#scroll_div').show();
+                                $('#scroll_begin').text(data.data[0].content);
+                                $('.broad_icon img').attr('src',data.data[0].imgUrl);
+                                ScrollImgLeft();
+                            }
+                        }
+                    });
+                }
+                /*$('body,html').height(document.body.clientHeight);*/
+                $('#person_center').click(function () {
+                    $('#my_center').show();
+                    $('#bg_black').show();
+                    $('.my_center').animate({
+                        'left':0
+                    },500);
+                });
+                $('#bg_black').click(function () {
+                    $(this).hide();
+                    $('.my_center').animate({
+                        'left':'-64%'
+                    },500);
+                });
+                $('.go_back').click(function () {
+                    window.history.go(-1);
+                });
+                /*getPersonInfo();*/
+            });
+            //获取用户信息
+            /*function getPersonInfo(){
+                $.post("/rainbow/wechat/r/getRowbowUser",function(data) {
+                    $("#nicheng").text(data.uname);
+                    $("#phoneNum").text(data.umobile);
+                    $("#userId_index").text(data.uid);
+                    sessionStorage.setItem("nicheng", data.uname);
+                    sessionStorage.setItem("phoneNum", data.umobile);
+                    sessionStorage.setItem("userId", data.uid);
+                });
+            };*/
+            //文字滚动
+            function ScrollImgLeft(){
+                var speed=50;
+                var MyMar = null;
+                var scroll_begin = document.getElementById("scroll_begin");
+                var scroll_end = document.getElementById("scroll_end");
+                var scroll_div = document.getElementById("scroll_div");
+                scroll_end.innerHTML=scroll_begin.innerHTML;
+                function Marquee(){
+                    if(scroll_end.offsetWidth-scroll_div.scrollLeft<=0)
+                        scroll_div.scrollLeft-=scroll_begin.offsetWidth;
+                    else
+                        scroll_div.scrollLeft++;
+                }
+                MyMar=setInterval(Marquee,speed);
+                scroll_div.onmouseover = function(){
+                    clearInterval(MyMar);
+                }
+                scroll_div.onmouseout = function(){
+                    MyMar = setInterval(Marquee,speed);
+                }
+            }
+            //禁用字体放大功能
+            (function() {
+                if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+                    handleFontSize();
+                } else {
+                    if (document.addEventListener) {
+                        document.addEventListener("WeixinJSBridgeReady", handleFontSize, false);
+                    } else if (document.attachEvent) {
+                        document.attachEvent("WeixinJSBridgeReady", handleFontSize);
+                        document.attachEvent("onWeixinJSBridgeReady", handleFontSize);  }
+                }
+                function handleFontSize() {
+                    // 设置网页字体为默认大小
+                    WeixinJSBridge.invoke('setFontSizeCallback', { 'fontSize' : 0 });
+                    // 重写设置网页字体大小的事件
+                    WeixinJSBridge.on('menu:setfont', function() {
+                        WeixinJSBridge.invoke('setFontSizeCallback', { 'fontSize' : 0 });
+                    });
+                }
+            })();
+//            alert(window.location.href);
+            $(".content").css("height", $(document).height() - 85);
+            if (wx) {
+                var url = window.location.href;
+                title = '我正在使用彩虹巴士，快快关注吧!';
+                share_link = 'http://www.rainbow-bus.cn/rainbow/wechat/ssb';
+               /* var imgUrl = 'http://www.rainbow-bus.cn/rainbow/wechat/favicon.ico';*/
+                var imgUrl = 'http://www.rainbow-bus.cn/rainbow/wechat/img/now_logo.png';
+                wx.config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: 'wxc9677e0af80233ef', // 必填，公众号的唯一标识
+                    timestamp:  '1538671010',// 必填，生成签名的时间戳
+                    nonceStr: 'Wm3WZYTPz0wzccnW', // 必填，生成签名的随机串
+                    signature: 'ed943eae0453331f8ea675c4aa21a2e62d577420',// 必填，签名，见附录1
+                    jsApiList: [
+                        'onMenuShareTimeline',  // 分享到朋友圈
+                        'onMenuShareAppMessage', // 分享给朋友
+//                        'onMenuShareQQ', // 分享到QQ
+//                        'onMenuShareWeibo',  // 分享到腾讯微博
+//                        'onMenuShareQZone', // 分享到QQ空间
+                        'checkJsApi',
+                        'scanQRCode',
+                        'getLocation'
+                    ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                });
+                wx.error(function (res) {
+                    console.log(res.errMsg);  //打印错误消息。及把 debug:false,设置为debug:ture就可以直接在网页上看到弹出的错误提示
+                });
+                title = $('#titleHidden').val();
+                share_link = window.location.href;
+                imgUrl = 'http://www.rainbow-bus.cn/rainbow/wechat/img/now_logo.png';
+                wx.ready(function() {
+                    wx.onMenuShareTimeline({
+                        title: title, // 分享标题
+                        link: share_link, // 分享链接
+                        imgUrl: imgUrl  // 分享图标
+                    });
+                    wx.onMenuShareAppMessage({
+                        title: title, // 分享标题
+                        link: share_link, // 分享链接
+                        imgUrl: imgUrl  // 分享图标
+
+                    });
+                })
+            }
+        </script>
+
+        <div class="weui_dialog_alert" id="dialog" style="display: none;">
+            <div class="weui_mask weui_mask_visible"></div>
+            <div class="weui_dialog weui_dialog_visible">
+                <div class="weui_dialog_hd"><strong class="weui_dialog_title"></strong></div>
+                <div class="weui_dialog_bd"></div>
+                <div class="weui_dialog_ft">
+                    <a id="okBtn"  href="javascript:$('#dialog').hide();" class="weui_btn_dialog primary">确定</a>
+                </div>
+            </div>
+        </div>
+
+        <!--new dialog-->
+        <div class="weui_dialog_alert" id="newDialog" style="display: none;">
+            <div class="weui_mask weui_mask_visible" id="closeDialog" ></div>
+            <div class="weui_dialog weui_dialog_visible">
+                <!--<div class="weui_dialog_hd"><strong class="weui_dialog_title"></strong></div>-->
+                <div class="clearfix weui_dialog_bd" style="padding: 18px 0;">
+                    <div class="cleft dig_img">&nbsp;</div>
+                    <div class="cleft dig_content" style="width: 63%;">
+                        <img class="dig_warning" src="/rainbow/wechat/img/dig_warning.png">
+                        <img class="dig_success" src="/rainbow/wechat/img/dig_success.png">
+                        <div class="dig_title"></div>
+                        <div class="dig_text"></div>
+                    </div>
+                </div>
+               <!-- <div class="weui_dialog_ft">
+                    <a id="closeDialog" href="javascript:$('#dialog').hide();" class="weui_btn_dialog primary">确定</a>
+                </div>-->
+            </div>
+        </div>
+        <form>
+            <input id="userId_index" type="hidden" />
+        </form>
+    </body>
+</html>

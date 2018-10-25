@@ -4,9 +4,14 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.graphics.ColorUtils;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -28,12 +33,10 @@ import lock.war3.pub.areyouok.widget.ParticleView;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class CaiHongTicketActivity extends AutoLayoutActivity {
+public class CaiHongTicketActivity extends AppCompatActivity {
 
     @BindView(R.id.ib_back)
     ImageView ibBack;
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
     @BindView(R.id.shuttle_tv_line)
     TextView shuttleTvLine;
     @BindView(R.id.shuttle_tv_start)
@@ -70,17 +73,37 @@ public class CaiHongTicketActivity extends AutoLayoutActivity {
     TextView carNum;
     @BindView(R.id.tv_date)
     TextView tvDate;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
     @BindView(R.id.shuttle_btn_pay)
     Button shuttleBtnPay;
     @BindView(R.id.scrolll)
     ScrollView scrolll;
+    @BindView(R.id.webview)
+    WebView webview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cai_hong_ticket);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if ("Xiaomi".equals(Build.MANUFACTURER)) {
+                StatusBarUtil.setColor(this, getResources().getColor(android.R.color.white), 0);
+                Utils.StatusBarLightMode(this, 1);
+            } else if ("MEIZU".equals(Build.MANUFACTURER)) {
+                //识别魅族手机 测试下魅族5.0的手机
+                StatusBarUtil.setColor(this, getResources().getColor(android.R.color.white), 0);
+                Utils.StatusBarLightMode(this, 2);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                StatusBarUtil.setColor(this, getResources().getColor(android.R.color.white), 0);
+                Utils.StatusBarLightMode(this, 3);
+            } else {
+                StatusBarUtil.setColor(this, getResources().getColor(android.R.color.white), 0);
+            }
+        } else {
+            StatusBarUtil.setColor(this, getResources().getColor(android.R.color.white), 0);
+        }
         ButterKnife.bind(this);
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.color4));
 //        CaihongView3 caihongView3 = (CaihongView3) findViewById(R.id.pv);
 //        ObjectAnimator animator = ObjectAnimator.ofFloat(caihongView3,"rotation",0,180,0);
 //        animator.setDuration(2000);
@@ -89,6 +112,11 @@ public class CaiHongTicketActivity extends AutoLayoutActivity {
     }
 
     private void initData() {
+
+        webview.loadUrl("file:///android_asset/caihong.html");
+        tvTitle.setText(Html.fromHtml("<font>Rainbow</font>"));
+//        tvTitle.setTypeface(Typeface.DEFAULT);
+
         int hourOfDay = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
