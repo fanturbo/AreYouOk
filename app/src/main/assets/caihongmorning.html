@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Rainbow</title>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
-          name='viewport'>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
-    <link href="http://www.rainbow-bus.cn/rainbow/wechat/css/weui.min.css" rel="stylesheet"/>
-    <link href="http://www.rainbow-bus.cn/rainbow/wechat/lib/jquery-weui/css/jquery-weui.css"
-          rel="stylesheet"/>
-    <link href="http://www.rainbow-bus.cn/rainbow/wechat/css/wechat.css" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="http://www.rainbow-bus.cn/rainbow/wechat/js/axios.min.js"></script>
-    <script src="http://www.rainbow-bus.cn/rainbow/wechat/lib/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script type="text/javascript">
+    <head>
+        <meta charset="UTF-8">
+        <title>Rainbow</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <link href="http://www.rainbow-bus.cn/rainbow/wechat/css/weui.min.css" rel="stylesheet" />
+        <link href="http://www.rainbow-bus.cn/rainbow/wechat/lib/jquery-weui/css/jquery-weui.css" rel="stylesheet" />
+        <link href="http://www.rainbow-bus.cn/rainbow/wechat/css/wechat.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="http://www.rainbow-bus.cn/rainbow/wechat/js/axios.min.js"></script>
+        <script src="http://www.rainbow-bus.cn/rainbow/wechat/lib/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script type="text/javascript">
             /**
              * 加法计算
              * @param arg1
@@ -79,23 +77,20 @@
                 window.location.href = redirect_url;
 
             }
-
-    </script>
-    <style>
+        </script>
+        <style>
             #cnzz_stat_icon_1261420836{
                 display: none;
             }
-
-    </style>
-</head>
-<body>
-<script src="/rainbow/wechat/lib/jquery-weui/js/toast.js"></script>
-<script src="http://www.rainbow-bus.cn/rainbow/wechat/lib/jquery-weui/js/jquery-extend.js"></script>
-<script src="http://www.rainbow-bus.cn/rainbow/wechat/js/vue.js"></script>
-<script src="http://www.rainbow-bus.cn/rainbow/wechat/js/axios.min.js"></script>
-<link rel="stylesheet" href="http://www.rainbow-bus.cn/rainbow/wechat/css/ticket.css"/>
-<script id="-mob-share"
-        src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1ab82983ace6e"></script>
+        </style>
+    </head>
+    <body>
+        <script src="/rainbow/wechat/lib/jquery-weui/js/toast.js"></script>
+        <script src="http://www.rainbow-bus.cn/rainbow/wechat/lib/jquery-weui/js/jquery-extend.js"></script>
+        <script src="http://www.rainbow-bus.cn/rainbow/wechat/js/vue.js"></script>
+        <script src="http://www.rainbow-bus.cn/rainbow/wechat/js/axios.min.js"></script>
+        <link rel="stylesheet" href="http://www.rainbow-bus.cn/rainbow/wechat/css/ticket.css" />
+        <script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1ab82983ace6e"></script>
 <style type="text/css">
     /* body {
          overflow: hidden;
@@ -150,7 +145,6 @@
     .every_bill_title{
         margin-right: 16px;
     }
-
 </style>
 
 <script type="text/javascript">
@@ -316,7 +310,6 @@
 
     }
 
-
 </script>
 <div class="open_wechat">
     <img src="/rainbow/wechat/img/open_wechat.png">
@@ -325,10 +318,8 @@
     <div class="headerBar ">
         <a class="go_back" href="javascript:void(0);"></a>
         订单详情
-        <span class="cright back_rule" id="backRule" href="javascript:void(0)"
-              hidden><i>?</i></span>
-        <span class="cright back_ticket" style="width:40px;right:30px;" id="bak"
-              href="javascript:void(0)" hidden>退款</span>
+        <span class="cright back_rule" id="backRule" href="javascript:void(0)" hidden><i>?</i></span>
+        <span class="cright back_ticket" style="width:40px;right:30px;" id="bak" href="javascript:void(0)" hidden>退款</span>
     </div>
     <div class="content" id="orderDetail">
         <div class="driver_name" style="display: none;">
@@ -343,13 +334,11 @@
             <div class="ticket_title clearfix" style="height: 98px;">
                 <h3 class="route_name" v-text="routeName"></h3>
                 <div class="start_end clearfix">
-                    <p class=" start_ads clearfix"
-                       style=" height:18px; line-height: 18px; font-size: 13px;">
+                    <p class=" start_ads clearfix" style=" height:18px; line-height: 18px; font-size: 13px;">
                         <i class=" cleft start_circle"></i>
                         <span class="cleft" v-text="firstStationName"></span>
                     </p>
-                    <p class=" end_ads clearfix"
-                       style=" height:18px; line-height: 18px; font-size: 13px;">
+                    <p class=" end_ads clearfix" style=" height:18px; line-height: 18px; font-size: 13px;">
                         <i class="cleft end_circle"></i>
                         <span class="cleft" v-text="lastStationName"></span>
                     </p>
@@ -358,8 +347,7 @@
             <div class="" style="height:200px;">
                 <!--<h3 style=" margin-top: 12px; font-size: 43px; padding: 36px 0 0; text-align: center;color:#486ba6; " id="car_number1"></h3>-->
                 <div class="seat_info" style="color: #486ba6;">
-                    <div class="clearfix bg_animate seat_info_block"
-                         style=" position: absolute; top: 96px; font-size: 1.5rem; font-weight: bold; width:100%; margin: 0 auto;text-align: center;z-index: 10; background-image: none;">
+                    <div class="clearfix bg_animate seat_info_block" style=" position: absolute; top: 96px; font-size: 1.5rem; font-weight: bold; width:100%; margin: 0 auto;text-align: center;z-index: 10; background-image: none;">
                         <div>
                             <span v-text="carTime"></span>
                         </div>
@@ -374,130 +362,123 @@
                     </div>
                 </div>
             </div>
+    </div>
+        <div id="otherTicket" class="bill_details" style="padding-bottom: 13px;" v-if="!isCheckTicket">
+        <div class="clearfix route_details_title">
+            <h3 class="route_name cleft" id="route_name1" v-text="routeName"></h3>
         </div>
-        <div id="otherTicket" class="bill_details" style="padding-bottom: 13px;"
-             v-if="!isCheckTicket">
-            <div class="clearfix route_details_title">
-                <h3 class="route_name cleft" id="route_name1" v-text="routeName"></h3>
+        <div class="start_end">
+            <div class="clearfix start_point mt2">
+                <i class=" cleft start_circle"></i>
+                <p class="cleft" style="width: 84%; overflow:hidden; white-space: nowrap;text-overflow: ellipsis " v-text="firstStationName"></p>
             </div>
-            <div class="start_end">
-                <div class="clearfix start_point mt2">
-                    <i class=" cleft start_circle"></i>
-                    <p class="cleft"
-                       style="width: 84%; overflow:hidden; white-space: nowrap;text-overflow: ellipsis "
-                       v-text="firstStationName"></p>
-                </div>
 
-                <div class="clearfix end_point">
-                    <i class=" cleft end_circle"></i>
-                    <p class="cleft" style="width: 84%; overflow:hidden; "
-                       v-text="lastStationName"></p>
+            <div class="clearfix end_point">
+                <i class=" cleft end_circle"></i>
+                <p class="cleft" style="width: 84%; overflow:hidden; " v-text="lastStationName"></p>
+            </div>
+        </div>
+        <div class="seat_info" style="display: none;">
+            <div class="clearfix seat_info_block" style="font-weight: bold; width:90%; margin: 0 auto;text-align: center;">
+                <div>
                 </div>
             </div>
-            <div class="seat_info" style="display: none;">
-                <div class="clearfix seat_info_block"
-                     style="font-weight: bold; width:90%; margin: 0 auto;text-align: center;">
-                    <div>
-                    </div>
-                </div>
-            </div>
+        </div>
         </div>
         <div id="more_operate" class="clearfix more_operate" style="display: none;">
-            <a id="join_talk" class="cleft car_position join_talk_2">加入群聊</a>
-            <a id="vp" class="cright car_position" href="javascript:void(0);">站点信息</a>
+        <a id="join_talk" class="cleft car_position join_talk_2">加入群聊</a>
+        <a id="vp" class="cright car_position" href="javascript:void(0);">站点信息</a>
         </div>
         <div id="other_details_info">
-            <div class="bill_details">
-                <h3 class="route_details_title">乘车信息</h3>
-                <ul class="bill_details_list">
-                    <li class="clearfix">
-                        <span class="cleft every_bill_title">乘车日期:</span>
-                        <p class="cleft" style="color: #00a7d0; font-weight: bold;"
-                           v-text="carTime"></p>
-                    </li>
-                </ul>
-            </div>
+        <div class="bill_details">
+            <h3 class="route_details_title">乘车信息</h3>
+            <ul class="bill_details_list">
+                <li class="clearfix">
+                    <span class="cleft every_bill_title">乘车日期:</span>
+                    <p class="cleft" style="color: #00a7d0; font-weight: bold;" v-text="carTime"></p>
+                </li>
+            </ul>
+        </div>
 
-            <div class="bill_details">
-                <h3 class="route_details_title">支付信息</h3>
-                <ul class="bill_details_list">
-                    <li class="clearfix">
-                        <span class="cleft every_bill_title">实付金额:</span>
-                        <p class="cleft" id="paid" v-text="money"></p>
-                    </li>
-                    <li class="clearfix">
-                        <span class="cleft every_bill_title">订单状态:</span>
-                        <p class="cleft" id="orderState" v-text="orderStatusT"></p>
-                    </li>
-                    <li class="clearfix">
-                        <span class="cleft every_bill_title ">下单日期</span>
-                        <p class="cleft orange" style="color: #999;" v-text="carTime"></p>
-                    </li>
-                    <li class="clearfix">
-                        <span class="cleft every_bill_title ">订单编号</span>
-                        <p class="cleft orange" style="color: #999;" v-text="orderNumber"></p>
-                    </li>
-                </ul>
-            </div>
-            <div style="height: 2px;background: #f2f2f2;"></div>
-            <div class="weui_cell_new" style="display:none ;padding: 0px 10px 0px 10px;">
-                <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px;">
-                    <span>发车时间：</span><span id="routeTime"></span>
-                    <button id="payMoney" style="display: none;float: right;margin-right: 10px;color:white;
-                    height: 30px;width: 60px;background-color: #05B402;border: 0;border-radius: 5px;">
-                        支付
-                    </button>
+        <div class="bill_details">
+            <h3 class="route_details_title">支付信息</h3>
+            <ul class="bill_details_list">
+                <li class="clearfix">
+                    <span class="cleft every_bill_title">实付金额:</span>
+                    <p class="cleft" id="paid" v-text="money"></p>
+                </li>
+                <li class="clearfix">
+                    <span class="cleft every_bill_title">订单状态:</span>
+                    <p class="cleft" id="orderState" v-text="orderStatusT"></p>
+                </li>
+                <li class="clearfix">
+                    <span class="cleft every_bill_title ">下单日期</span>
+                    <p class="cleft orange" style="color: #999;" v-text="carTime"></p>
+                </li>
+                <li class="clearfix">
+                    <span class="cleft every_bill_title ">订单编号</span>
+                    <p class="cleft orange" style="color: #999;" v-text="orderNumber"></p>
+                </li>
+            </ul>
+        </div>
+        <div style="height: 2px;background: #f2f2f2;"></div>
+        <div class="weui_cell_new" style="display:none ;padding: 0px 10px 0px 10px;">
+            <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px;">
+                <span>发车时间：</span><span id="routeTime"></span>
+                <button id="payMoney" style="display: none;float: right;margin-right: 10px;color:white;
+                    height: 30px;width: 60px;background-color: #05B402;border: 0;border-radius: 5px;">支付
+                </button>
 
-                </div>
             </div>
+        </div>
         </div>
 
 
-        <div class="weui_cells" style=" display:none ;margin-top:0;background-color: white;">
-            <div class="weui_cell" style="padding: 10px;border:0;">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <span id="type"></span>
-                </div>
-                <div class="weui_cell_new">
-                    <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px;">
-                        <!--<span>下单时间：</span><span id="createTime"></span>-->
-                    </div>
-                </div>
+
+    <div class="weui_cells" style=" display:none ;margin-top:0;background-color: white;">
+        <div class="weui_cell" style="padding: 10px;border:0;">
+            <div class="weui_cell_bd weui_cell_primary">
+                <span id="type"></span>
             </div>
-            <div class="weui_cell" style="padding: 5px 10px 5px 10px;">
-                <div class="weui_cell_bd weui_cell_primary" style=" font-size: 16px">
-                    <span id="routeName"></span>
-                </div>
-            </div>
-            <div class="weui_cell_new" style="padding: 0px 10px 0px 10px;border-top: 5px;">
-                <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px">
-                    <span>行&#12288;&#12288;程：</span><span id="distance"></span><span>公里</span>
-                </div>
-            </div>
-            <div class="weui_cell_new" style="padding: 0px 10px 0px 10px;">
+            <div class="weui_cell_new">
                 <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px;">
-                    <span>用&#12288;&#12288;时：约<span id="tripTime"></span>分钟</span>
+                    <!--<span>下单时间：</span><span id="createTime"></span>-->
                 </div>
             </div>
-
-            <div class="weui_cell_new" style="padding: 0px 10px 0px 10px;border-top: 5px;">
-                <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px">
-                    <span>到站时间：</span><span id="firstTime"></span>
-                </div>
-            </div>
-            <div class="weui_cell weui-row weui-no-gutter" style="font-size: 14px; ">
-                <div class="weui_cell_bd weui_cell_primary weui-col-60">
-                    <span>车票</span>
-                </div>
-                <div class=" weui-col-40 weui-row weui-no-gutter" style="color: red">
-                    <span class="weui-col-50" style="padding-left: 15%;">X<span
-                            id="count"></span></span>
-                    <span class="weui-col-50">￥<span id="ticketPrice"></span></span>
-                </div>
-            </div>
-            <div id="service" class="weui_cells" style="margin-top: 0"></div>
-
         </div>
+        <div class="weui_cell" style="padding: 5px 10px 5px 10px;">
+            <div class="weui_cell_bd weui_cell_primary" style=" font-size: 16px">
+                <span id="routeName"></span>
+            </div>
+        </div>
+        <div class="weui_cell_new" style="padding: 0px 10px 0px 10px;border-top: 5px;">
+            <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px">
+                <span>行&#12288;&#12288;程：</span><span id="distance"></span><span>公里</span>
+            </div>
+        </div>
+        <div class="weui_cell_new" style="padding: 0px 10px 0px 10px;">
+            <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px;">
+                <span>用&#12288;&#12288;时：约<span id="tripTime"></span>分钟</span>
+            </div>
+        </div>
+
+        <div class="weui_cell_new" style="padding: 0px 10px 0px 10px;border-top: 5px;">
+            <div class="weui_cell_bd weui_cell_primary" style="font-size: 12px">
+                <span>到站时间：</span><span id="firstTime"></span>
+            </div>
+        </div>
+        <div class="weui_cell weui-row weui-no-gutter" style="font-size: 14px; ">
+            <div class="weui_cell_bd weui_cell_primary weui-col-60">
+                <span>车票</span>
+            </div>
+            <div class=" weui-col-40 weui-row weui-no-gutter" style="color: red">
+                <span class="weui-col-50" style="padding-left: 15%;">X<span id="count"></span></span>
+                <span class="weui-col-50">￥<span id="ticketPrice"></span></span>
+            </div>
+        </div>
+        <div id="service" class="weui_cells" style="margin-top: 0"></div>
+
+    </div>
     </div>
     <div class="pay_moneyDiv" style="position: fixed; padding-top: 0;">
         <a id="btn_a" href="/rainbow/wechat/cht" class="weui_btn_warn pay_money_btn">继续乘车</a>
@@ -505,27 +486,17 @@
     <div class="weui_dialog_confirm" id="dialog1" style="display: none;">
         <div class="weui_mask weui_mask_visible"></div>
         <div class="weui_dialog weui_dialog_visible">
-            <div class="trade_record_title"
-                 style="width: 50%;border-color: #999; margin: 0 auto 26px;;">
-                <p style="background: #fafafc;font-size: 0.8rem;color: #555; font-weight: bold;">
-                    退订车票</p>
+            <div class="trade_record_title" style="width: 50%;border-color: #999; margin: 0 auto 26px;;">
+                <p style="background: #fafafc;font-size: 0.8rem;color: #555; font-weight: bold;">退订车票</p>
             </div>
-            <div class="weui_dialog_bd" style="color: #333; text-align: center; font-size: 15px;">
-                <span v-text="firstStationName"></span>--<span v-text="lastStationName"></span>
-            </div>
-            <div class="weui_dialog_bd"
-                 style="margin: 10px auto; font-size: 14px; text-align: center;">乘车日期<span
-                    id="serviceDate_t"></span><br/>退款金额￥<span id="paid_t"></span><span id="pay_hand"
-                                                                                       style="display: none;">&nbsp;&nbsp;手续费￥<span
-                    id="pay_handling"></span></span></div>
+            <div class="weui_dialog_bd" style="color: #333; text-align: center; font-size: 15px;"><span v-text="firstStationName"></span>--<span v-text="lastStationName"></span></div>
+            <div class="weui_dialog_bd" style="margin: 10px auto; font-size: 14px; text-align: center;">乘车日期<span id="serviceDate_t"></span><br />退款金额￥<span id="paid_t"></span><span id="pay_hand" style="display: none;">&nbsp;&nbsp;手续费￥<span id="pay_handling"></span></span></div>
 
             <!--<div class="weui_dialog_bd">退款金额￥<span>20.00</span></div>-->
             <!--<div class="weui_dialog_bd">退款后,金额会以零钱方式退回到您的账户</div>-->
             <div class="clearfix" style="margin: 20px;">
-                <a id="cancelBtn" href="javascript:;" class="cright pay_money_btn"
-                   style="width: 47%; height: 38px;background: #fff;color:#999;border:1px solid #ccc; ">取消</a>
-                <a id="okBtn" href="javascript:;" class="cleft pay_money_btn"
-                   style="width: 47%;">确定</a>
+                <a id="cancelBtn" href="javascript:;" class="cright pay_money_btn" style="width: 47%; height: 38px;background: #fff;color:#999;border:1px solid #ccc; ">取消</a>
+                <a id="okBtn" href="javascript:;" class="cleft pay_money_btn" style="width: 47%;">确定</a>
             </div>
             <p id="returnCount" style="margin:-10px 0 10px 0;text-align: center;color: red"></p>
         </div>
@@ -549,7 +520,7 @@
     </div>
     <form id="detailForm" action="" method="post">
         <input id="soIdHidden" name="soIdHidden" type="hidden" value="153990658182656467144"/>
-        <input id="buyTypeHidden" type="hidden"/>
+        <input id="buyTypeHidden" type="hidden" />
         <input id="tbHidden" name="tbHidden" type="hidden" value="1"/>
         <input id="idHidden" type="hidden"/>
         <input id="tboneHidden" type="hidden"/>
@@ -562,30 +533,30 @@
         <input id="routesId" name="routesIdHidden" type="hidden" value="661"/>
         <input id="uid" name="uidHidden" type="hidden" value=""/>
         <input id="did" name="didHidden" type="hidden" value=""/>
-        <input id="orderId" name="orderIdHidden" type="hidden"/>
-        <input id="createTimeHidden" name="createTimeHidden" type="hidden"/>
+        <input id="orderId" name="orderIdHidden" type="hidden" />
+        <input id="createTimeHidden" name="createTimeHidden" type="hidden" />
         <!--分享title-->
-        <input id="titleHidden" name="titleHidden" type="hidden"/>
+        <input id="titleHidden" name="titleHidden" type="hidden" />
         <!--分享url-->
-        <input id="urlHidden" name="urlHidden" type="hidden"/>
+        <input id="urlHidden" name="urlHidden" type="hidden" />
         <!--分享imgUrl-->
-        <input id="imgUrlHidden" name="imgUrlHidden" type="hidden"/>
+        <input id="imgUrlHidden" name="imgUrlHidden" type="hidden" />
     </form>
 </div>
 <script>
     new Vue({
         el:'#ferryDetails',
         data:{
-            routeName:'C001回龙观东大街~紫金新干线',
+            routeName:'C001紫金新干线—回龙观东大街地铁',
             orderId:'D153923459901239324417622',
             orderNumber:'D153923459901239324417622',
             carTime:'2018-10-25',
             driveName:'',
-            money:'2',
+            money:'2.99',
             orderStatus: '0',
             isCheckTicket: true,
-            firstStationName:'回龙观东大街D口',
-            lastStationName:'紫金新干线2区',
+            firstStationName:'紫金新干线二区西门',
+            lastStationName:'回龙观东大街地铁站',
         },
         mounted:function () {
             this.getDetails();
@@ -617,9 +588,8 @@
             }
         }
     })
-
 </script>
-<script type="text/javascript">
+        <script type="text/javascript">
             var aaa = "1111";
             var title = '';
             var share_link =  '';
@@ -758,42 +728,40 @@
                     });
                 })
             }
+        </script>
 
-</script>
-
-<div class="weui_dialog_alert" id="dialog" style="display: none;">
-    <div class="weui_mask weui_mask_visible"></div>
-    <div class="weui_dialog weui_dialog_visible">
-        <div class="weui_dialog_hd"><strong class="weui_dialog_title"></strong></div>
-        <div class="weui_dialog_bd"></div>
-        <div class="weui_dialog_ft">
-            <a id="okBtn" href="javascript:$('#dialog').hide();"
-               class="weui_btn_dialog primary">确定</a>
-        </div>
-    </div>
-</div>
-
-<!--new dialog-->
-<div class="weui_dialog_alert" id="newDialog" style="display: none;">
-    <div class="weui_mask weui_mask_visible" id="closeDialog"></div>
-    <div class="weui_dialog weui_dialog_visible">
-        <!--<div class="weui_dialog_hd"><strong class="weui_dialog_title"></strong></div>-->
-        <div class="clearfix weui_dialog_bd" style="padding: 18px 0;">
-            <div class="cleft dig_img">&nbsp;</div>
-            <div class="cleft dig_content" style="width: 63%;">
-                <img class="dig_warning" src="/rainbow/wechat/img/dig_warning.png">
-                <img class="dig_success" src="/rainbow/wechat/img/dig_success.png">
-                <div class="dig_title"></div>
-                <div class="dig_text"></div>
+        <div class="weui_dialog_alert" id="dialog" style="display: none;">
+            <div class="weui_mask weui_mask_visible"></div>
+            <div class="weui_dialog weui_dialog_visible">
+                <div class="weui_dialog_hd"><strong class="weui_dialog_title"></strong></div>
+                <div class="weui_dialog_bd"></div>
+                <div class="weui_dialog_ft">
+                    <a id="okBtn"  href="javascript:$('#dialog').hide();" class="weui_btn_dialog primary">确定</a>
+                </div>
             </div>
         </div>
-        <!-- <div class="weui_dialog_ft">
-             <a id="closeDialog" href="javascript:$('#dialog').hide();" class="weui_btn_dialog primary">确定</a>
-         </div>-->
-    </div>
-</div>
-<form>
-    <input id="userId_index" type="hidden"/>
-</form>
-</body>
+
+        <!--new dialog-->
+        <div class="weui_dialog_alert" id="newDialog" style="display: none;">
+            <div class="weui_mask weui_mask_visible" id="closeDialog" ></div>
+            <div class="weui_dialog weui_dialog_visible">
+                <!--<div class="weui_dialog_hd"><strong class="weui_dialog_title"></strong></div>-->
+                <div class="clearfix weui_dialog_bd" style="padding: 18px 0;">
+                    <div class="cleft dig_img">&nbsp;</div>
+                    <div class="cleft dig_content" style="width: 63%;">
+                        <img class="dig_warning" src="/rainbow/wechat/img/dig_warning.png">
+                        <img class="dig_success" src="/rainbow/wechat/img/dig_success.png">
+                        <div class="dig_title"></div>
+                        <div class="dig_text"></div>
+                    </div>
+                </div>
+               <!-- <div class="weui_dialog_ft">
+                    <a id="closeDialog" href="javascript:$('#dialog').hide();" class="weui_btn_dialog primary">确定</a>
+                </div>-->
+            </div>
+        </div>
+        <form>
+            <input id="userId_index" type="hidden" />
+        </form>
+    </body>
 </html>

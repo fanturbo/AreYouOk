@@ -38,7 +38,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="彩虹巴士" />
+            android:text="彩虹巴士早上2.99元" />
+
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="彩虹巴士晚上2元" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

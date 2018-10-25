@@ -4,14 +4,10 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -20,22 +16,18 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.jaeger.library.StatusBarUtil;
-import com.zhy.autolayout.AutoLayoutActivity;
-import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import lock.war3.pub.areyouok.widget.CaihongView3;
-import lock.war3.pub.areyouok.widget.ParticleView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class CaiHongTicketActivity extends AppCompatActivity {
+public class CaiHongTicketMorningActivity extends AppCompatActivity {
 
     @BindView(R.id.ib_back)
     ImageView ibBack;
@@ -126,7 +118,7 @@ public class CaiHongTicketActivity extends AppCompatActivity {
 
     private void initData() {
 
-        mWebView.loadUrl("file:///android_asset/caihong.html");
+        mWebView.loadUrl("file:///android_asset/caihongmorning.html");
         Typeface mtypeface=Typeface.createFromAsset(getAssets(),"TypoPRO_Roboto_Medium.ttf");
         tvTitle.setTypeface(mtypeface);
 
