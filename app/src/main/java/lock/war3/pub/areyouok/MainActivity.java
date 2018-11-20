@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -52,7 +54,7 @@ public class MainActivity extends AutoLayoutActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, HaluoWeChatActivity.class);
-                intent.putExtra("price","1");
+                intent.putExtra("price", "1");
                 startActivity(intent);
             }
         });
@@ -61,7 +63,7 @@ public class MainActivity extends AutoLayoutActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, HaluoWeChatActivity.class);
-                intent.putExtra("price","2");
+                intent.putExtra("price", "2");
                 startActivity(intent);
             }
         });
@@ -76,6 +78,22 @@ public class MainActivity extends AutoLayoutActivity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, CaiHongTicketActivity.class));
+            }
+        });
+
+
+        final EditText etRoute = (EditText) findViewById(R.id.et_route);
+        final EditText etRouteStart = (EditText) findViewById(R.id.et_route_start);
+        final EditText etRouteEnd = (EditText) findViewById(R.id.et_route_end);
+        findViewById(R.id.btn4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, CaiHongTicketCustomActivity.class);
+                intent.putExtra("etRoute", etRoute.getText().toString());
+                intent.putExtra("etRouteStart", etRouteStart.getText().toString());
+                intent.putExtra("etRouteEnd", etRouteEnd.getText().toString());
+                startActivity(intent);
             }
         });
 

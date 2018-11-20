@@ -13,39 +13,86 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="哈罗班车" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_haluo_wechat_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="哈罗班车微信1元" />
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="哈罗班车app" />
 
-        <Button
-            android:id="@+id/btn_haluo_wechat_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="哈罗班车微信2元" />
+            <Button
+                android:id="@+id/btn_haluo_wechat_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="哈罗班车微信1元" />
+
+            <Button
+                android:id="@+id/btn_haluo_wechat_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="哈罗班车微信2元" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="彩虹巴士早上2.99元" />
 
         <Button
             android:id="@+id/btn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="彩虹巴士晚上2元" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5px"
+            android:layout_marginTop="10dp"
+            android:background="@color/color4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color4"
+            android:layout_marginTop="5dp"
+            android:text="以下是自定义路线相关" />
+
+        <EditText
+            android:id="@+id/et_route"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="路线名字：例如C001紫金..." />
+
+        <EditText
+            android:id="@+id/et_route_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="起点：例如紫金新干线二区西门" />
+
+        <EditText
+            android:id="@+id/et_route_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="终点站：例如回龙观东大街地铁站" />
+
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="彩虹巴士自定义路线" />
+
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
