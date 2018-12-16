@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ayuhani.virtualkeyboarddemo">
+
+    <application>
+        <activity android:name=".normal.NormalActivity"></activity>
+        <activity android:name=".wechat.WeChatPayActivity"></activity>
+        <activity android:name=".alipay.AliPayActivity"></activity>
+        <activity android:name=".wechat.SuccessActivity"></activity>
+    </application>
+
+</manifest>

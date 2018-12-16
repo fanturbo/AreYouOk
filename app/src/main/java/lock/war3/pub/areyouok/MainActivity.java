@@ -1,9 +1,14 @@
 package lock.war3.pub.areyouok;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -19,13 +24,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.ayuhani.virtualkeyboarddemo.wechat.WeChatPayActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.qrcode.Constant;
+import com.example.qrcode.ScannerActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
-public class MainActivity extends AutoLayoutActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AutoLayoutActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ImageView imageView;
 
@@ -40,8 +48,7 @@ public class MainActivity extends AutoLayoutActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
@@ -96,10 +103,19 @@ public class MainActivity extends AutoLayoutActivity
                 startActivity(intent);
             }
         });
+        findViewById(R.id.btn5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    goScanner();
+                } else {
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CAMERA}, REQUEST_PERMISION_CODE_CAMARE);
+                }
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -107,6 +123,60 @@ public class MainActivity extends AutoLayoutActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    private final int REQUEST_PERMISION_CODE_CAMARE = 0;
+    private final int RESULT_REQUEST_CODE = 1;
+    private void goScanner() {
+        Intent intent = new Intent(this, ScannerActivity.class);
+        //这里可以用intent传递一些参数，比如扫码聚焦框尺寸大小，支持的扫码类型。
+        //        //设置扫码框的宽
+        //        intent.putExtra(Constant.EXTRA_SCANNER_FRAME_WIDTH, 400);
+        //        //设置扫码框的高
+        //        intent.putExtra(Constant.EXTRA_SCANNER_FRAME_HEIGHT, 400);
+        //        //设置扫码框距顶部的位置
+        //        intent.putExtra(Constant.EXTRA_SCANNER_FRAME_TOP_PADDING, 100);
+        //        //设置是否启用从相册获取二维码。
+        intent.putExtra(Constant.EXTRA_IS_ENABLE_SCAN_FROM_PIC,true);
+        //        Bundle bundle = new Bundle();
+        //        //设置支持的扫码类型
+        //        bundle.putSerializable(Constant.EXTRA_SCAN_CODE_TYPE, mHashMap);
+        //        intent.putExtras(bundle);
+        startActivityForResult(intent, RESULT_REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_PERMISION_CODE_CAMARE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    goScanner();
+                }
+                return;
+            }
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case RESULT_REQUEST_CODE:
+                    if (data == null) return;
+                    String type = data.getStringExtra(Constant.EXTRA_RESULT_CODE_TYPE);
+                    String content = data.getStringExtra(Constant.EXTRA_RESULT_CONTENT);
+//                    Toast.makeText(MainActivity.this, "codeType:" + type
+//                            + "-----content:" + content, Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, WeChatPayActivity.class));
+                    break;
+                default:
+                    break;
+
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
     /**
      * 设置ImageView的宽高
      *
